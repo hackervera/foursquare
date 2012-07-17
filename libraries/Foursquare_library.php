@@ -39,8 +39,7 @@ class Foursquare_library
 	  $recent_url = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=$access_token&v=20120717&limit=2";
 	  //error_log($recent_url);
 	  $checkin_data = json_decode(file_get_contents($recent_url));
-	  //error_log(json_encode($checkin_data));
-	  $last_checkin = $checkin_data->response->recent;
+	  //error_log("Checkin data: ".json_encode($checkin_data));
 	  return $checkin_data;
 	}
 
