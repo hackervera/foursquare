@@ -1,6 +1,9 @@
 <h3>Recent</h3>
 
-<p>This is the 'activity feed' of items pertaining to this module that can write into your code.</p>
+<p>This is the 'activity feed' of items pertaining to this module that can write into your code.
+<br>
+<?= json_encode($json_data); ?>
+</p>
 
 <h3>Custom</h3>
 
