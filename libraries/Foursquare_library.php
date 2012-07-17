@@ -36,7 +36,7 @@ class Foursquare_library
 	  //$limit = $_GET["limit"];
 	  //$limit = $limit || 2;
 	  $limit = 2;
-	  $recent_url = "https://api.foursquare.com/v2/checkins/recent?oauth_token=$access_token&v=20120717&limit=2";
+	  $recent_url = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=$access_token&v=20120717&limit=2";
 	  //error_log($recent_url);
 	  $checkin_data = json_decode(file_get_contents($recent_url));
 	  //error_log(json_encode($checkin_data));
