@@ -7,19 +7,26 @@
 		<p><a href="<?= base_url() ?>api/<?= $this_module ?>/uninstall" id="app_uninstall" class="button_delete">Uninstall</a></p>
 	</div>
 	
-	<h3>Permissions</h3>
+	<h3>Application Setup</h3>
 
-	<p>Create
-	<?= form_dropdown('create_permission', config_item('users_levels'), $settings['foursquare']['create_permission']) ?>
-	</p>
-
-	<p>Publish
-	<?= form_dropdown('publish_permission', config_item('users_levels'), $settings['foursquare']['publish_permission']) ?>	
-	</p>
-
-	<p>Manage All
-	<?= form_dropdown('manage_permission', config_item('users_levels'), $settings['foursquare']['manage_permission']) ?>	
-	</p>
+	<p>Foursquare requires <a href="https://developer.foursquare.com" target="_blank">registering your application</a>, when prompted enter the following values:</p>
+	<table>
+	<tr>
+		<td><strong>Application Name</strong>:</td>
+		<td><?= config_item('site_title') ?></td>
+	</tr>
+	<tr>
+		<td><strong>Website</strong>:</td>
+		<td><?= base_url() ?></td>
+	</tr>
+	<tr>	
+		<td><strong>OAuth redirect_uri</strong>:</td>
+		<td><?= base_url() ?>connections/foursquare/add</td>
+	</tr>
+	</table>
+	<p>You will then be provided with the following:</p>
+	<p><input type="text" name="client_id" value="<?= $settings['foursquare']['client_id'] ?>"> Client ID </p> 
+	<p><input type="text" name="client_secret" value="<?= $settings['foursquare']['client_secret'] ?>"> Client Secret</p>
 
 	<input type="hidden" name="module" value="<?= $this_module ?>">
 

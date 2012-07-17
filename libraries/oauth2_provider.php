@@ -18,7 +18,7 @@ class OAuth2_Provider_Foursquare extends OAuth2_Provider {
 
 	public function get_user_info(OAuth2_Token_Access $token)
 	{
-		$url = 'https://api.foursquare.com/user?'.http_build_query(array(
+		$url = 'https://api.foursquare.com/v2/user?'.http_build_query(array(
 			'access_token' => $token->access_token,
 		));
 

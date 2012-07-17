@@ -27,9 +27,9 @@ class Connections extends MY_Controller
     function add()
     {
         $provider = $this->oauth2->provider('foursquare', array(
-            'id' 	 => 'RKPPOBVYADQBE5ETGAXUGEFOZUOHVOZT05O4K4GIJFWEE03Y',
-            'secret' => 'KXDCJW5EBJU154I5WJFR4FM0X3DKAE1UC4RE4G1VGLMPYKGC',
-            'scope'	 => 'repo, user'
+            'id' 	 => config_item('foursquare_client_id'),
+            'secret' => config_item('foursquare_client_secret'),
+            'scope'	 => ''
         ));
 
         if (!isset($_GET['code']))
@@ -44,9 +44,7 @@ class Connections extends MY_Controller
             {                        
                 $token 	= $provider->access($_GET['code']);
                 
-                $user	= $provider->get_user_info($token);
-
-                $repos	= $provider->get_user_repos($token);
+                //$user	= $provider->get_user_info($token);
 
                 // Here you should use this information to A) look for a user B) help a new user sign up with existing data.
                 // If you store it all in a cookie and redirect to a registration page this is crazy-simple.
@@ -54,11 +52,7 @@ class Connections extends MY_Controller
                 print_r($token).PHP_EOL.PHP_EOL;
 
                 echo "User Info: ";
-                print_r($user);
-                
-                echo "Repos: ";
-                print_r($repos);
-
+                //print_r($user);
             }
 
             catch (OAuth2_Exception $e)

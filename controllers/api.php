@@ -21,15 +21,13 @@ class Api extends Oauth_Controller
 		// Load
 		$this->load->library('installer');
 		$this->load->config('install');
-		$this->load->dbforge();
-
-		// Create Data Table
-		$this->dbforge->add_key('data_id', TRUE);
-		$this->dbforge->add_field(config_item('database_foursquare_data_table'));
-		$this->dbforge->create_table('data');
 
 		// Settings & Create Folders
 		$settings = $this->installer->install_settings('foursquare', config_item('foursquare_settings'));
+
+		// Site
+		$site = $this->installer->install_sites(config_item('foursquare_sites'));
+
 
 		if ($settings == TRUE)
 		{
