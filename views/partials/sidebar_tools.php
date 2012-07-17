@@ -1,0 +1,1 @@
+<li><a class="sidebar_icon" href="<?= base_url() ?>home/foursquare"><img src="<?= $this_module_assets ?>foursquare_24.png"><span>Foursquare</span></a></li>
