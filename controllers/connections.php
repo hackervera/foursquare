@@ -42,7 +42,17 @@ class Connections extends MY_Controller
             // Howzit?
             try
             {                        
-                $token 	= $provider->access($_GET['code']);
+                //$token = $provider->access($_GET['code']);
+ 
+		 		$url = 'https://foursquare.com/oauth2/access_token?'.http_build_query(array(
+					'client_id'			=> config_item('foursquare_client_id'),
+					'client_secret'		=> config_item('foursquare_client_secret'),
+					'grant_type'		=> 'authorization_code',
+					'redirect_url'		=> base_url().'connections/foursquare/add',
+					'code' 				=> $_GET['code']
+				));
+		
+				$token = json_decode(file_get_contents($url)); 
                 
                 //$user	= $provider->get_user_info($token);
 
@@ -51,7 +61,6 @@ class Connections extends MY_Controller
                 echo "<pre>Tokens: ";
                 print_r($token).PHP_EOL.PHP_EOL;
 
-                echo "User Info: ";
                 //print_r($user);
             }
 

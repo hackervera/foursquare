@@ -8,7 +8,7 @@ class OAuth2_Provider_Foursquare extends OAuth2_Provider {
 
 	public function url_authorize()
 	{
-		return 'https://foursquare.com/oauth2/authorize';
+		return 'https://foursquare.com/oauth2/authenticate';
 	}
 
 	public function url_access_token()
