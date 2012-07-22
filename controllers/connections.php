@@ -54,7 +54,7 @@ class Connections extends MY_Controller
 				$user_info 	= json_decode(file_get_contents($user_info_url));
 				$user_id	= $user_info->response->user->id;
 				$username	= $user_info->response->user->firstName.$user_info->response->user->lastName;
-                
+
                 $connection_data = array(
                   'site_id'				=> $this->module_site->site_id,
                   'user_id'				=> $this->session->userdata('user_id'),
