@@ -47,11 +47,10 @@ class Connections extends MY_Controller
 					'redirect_uri'		=> base_url().'connections/foursquare/add',
 					'code' 				=> $_GET['code']
 				));
-		
-				$token = json_decode(file_get_contents($url)); 
-				$access_token = $token->access_token;
-				
-				$user_info_url = 'https://api.foursquare.com/v2/users/self?oauth_token='.$access_token.'&v=20120717';
+
+				$token			= json_decode(file_get_contents($url)); 
+				$access_token	= $token->access_token;
+				$user_info_url	= 'https://api.foursquare.com/v2/users/self?oauth_token='.$access_token.'&v=20120717';
 				$user_info 	= json_decode(file_get_contents($user_info_url));
 				$user_id	= $user_info->response->user->id;
 				$username	= $user_info->response->user->firstName.$user_info->response->user->lastName;
