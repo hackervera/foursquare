@@ -34,16 +34,12 @@ class Connections extends MY_Controller
 
         if (!isset($_GET['code']))
         {
-            // By sending no options it'll come back here
             $provider->authorize();
         }
         else
         {
-            // Howzit?
             try
-            {                        
-                //$token = $provider->access($_GET['code']);
- 
+            { 
 		 		$url = 'https://foursquare.com/oauth2/access_token?'.http_build_query(array(
 					'client_id'			=> config_item('foursquare_client_id'),
 					'client_secret'		=> config_item('foursquare_client_secret'),
@@ -55,43 +51,28 @@ class Connections extends MY_Controller
 				$token = json_decode(file_get_contents($url)); 
 				$access_token = $token->access_token;
 				
-				$user_info_url = "https://api.foursquare.com/v2/users/self?oauth_token=$access_token&v=20120717";
-				error_log("user info url: $user_info_url");
-				$user_info = json_decode(file_get_contents($user_info_url));
-				
-				$user_id = $user_info->response->user->id;
-				$username = $user_info->response->user->firstName.$user_info->response->user->lastName;
-                
-                //$user	= $provider->get_user_info($token);
-
-                // Here you should use this information to A) look for a user B) help a new user sign up with existing data.
-                // If you store it all in a cookie and redirect to a registration page this is crazy-simple.
-                //echo "<pre>Tokens: ";
-                //print_r($token).PHP_EOL.PHP_EOL;
+				$user_info_url = 'https://api.foursquare.com/v2/users/self?oauth_token='.$access_token.'&v=20120717';
+				$user_info 	= json_decode(file_get_contents($user_info_url));
+				$user_id	= $user_info->response->user->id;
+				$username	= $user_info->response->user->firstName.$user_info->response->user->lastName;
                 
                 $connection_data = array(
                   'site_id'				=> $this->module_site->site_id,
                   'user_id'				=> $this->session->userdata('user_id'),
                   'module'				=> 'foursquare',
-                  'type'					=> 'primary',
+                  'type'				=> 'primary',
                   'connection_user_id'	=> $user_id,
                   'connection_username'	=> $username,
-                  'auth_one'				=> $access_token
+                  'auth_one'			=> $access_token
                 );
-                
+
                 $connection = $this->social_auth->add_connection($connection_data);
-                
+
                 $this->social_auth->set_userdata_connections($this->session->userdata('user_id'));
-	
-					      $this->session->set_flashdata('message', 'Foursquare account connected');
-					      
-                redirect(connections_redirect(config_item('instagram_connections_redirect')), 'refresh');
-		
 
-	
+                $this->session->set_flashdata('message', 'Foursquare account connected');
 
-
-                //print_r($user);
+                redirect(connections_redirect(config_item('foursquare_connections_redirect')), 'refresh');
             }
 
             catch (OAuth2_Exception $e)
