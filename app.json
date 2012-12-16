@@ -1,0 +1,12 @@
+{
+	"app":"foursquare",
+	"name":"Foursquare",
+	"created":"2012-12-15",
+	"updated":"2012-12-15",
+	"creator":"Brennan Novak",
+	"category":"location",	
+	"links":{
+		"default":"home/foursquare"
+	},
+	"launcher":"yes"
+}
