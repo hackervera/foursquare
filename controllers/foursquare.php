@@ -8,22 +8,11 @@
 * 
 * Description: This file is for the public Foursquare Controller class
 */
-class foursquare extends Site_Controller
+class Foursquare extends Site_Controller
 {
     function __construct()
     {
         parent::__construct();       
-	}
-	
-	function index()
-	{
-		$this->data['page_title'] = 'Foursquare';
-		$this->render();
-	}
-
-	function view() 
-	{		
-		$this->render();
 	}
 	
 	/* Widgets */

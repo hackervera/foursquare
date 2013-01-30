@@ -15,7 +15,7 @@ class Home extends Dashboard_Controller
         parent::__construct();
 
 		$this->load->config('foursquare');
-		$connection  = $this->social_auth->check_connection_user($this->session->userdata('user_id'), 'foursquare', 'primary');
+		$connection = $this->social_auth->check_connection_user($this->session->userdata('user_id'), 'foursquare', 'primary');
 		
 		$this->load->library('foursquare_library', $connection->auth_one);
 
@@ -23,11 +23,13 @@ class Home extends Dashboard_Controller
 
 	}
 	
-	function custom()
+	function checkins()
 	{
-	  $checkins = $this->foursquare_library->recent_checkins();
-		$this->data['sub_title'] = 'Custom';
-	  $this->data['json_data'] = $checkins;
+		$checkins = $this->foursquare_library->recent_checkins();
+
+		$this->data['sub_title'] = 'Recent Checkins';
+		$this->data['json_data'] = $checkins;
+
 		$this->render();
 	}
 	

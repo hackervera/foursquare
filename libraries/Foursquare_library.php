@@ -12,35 +12,25 @@
 class Foursquare_library
 {
 	protected $api_url;
+	protected $access_token;
 
 	function __construct($access_token=FALSE)
 	{
 		// Global CodeIgniter instance
 		$this->ci =& get_instance();
 		
-		$this->api_url = 'https://api.CHANGE THIS VALUE.com';
+		$this->api_url = 'https://api.foursquare.com/v2';
 		$this->access_token = $access_token;
 	}
-	
-	/* Interact with Data_Model */
-	function my_custom_method($foursquare_user_id)
-	{
-		$request = $this->api_url.'add/more/url_stuffs/get_checkins?'.$foursquare_user_id;
-	
-		return $request;
-	}
-	
-	function recent_checkins(){
 
-	  $access_token = $this->access_token;
-	  //$limit = $_GET["limit"];
-	  //$limit = $limit || 2;
-	  $limit = 2;
-	  $recent_url = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=$access_token&v=20120717&limit=2";
-	  //error_log($recent_url);
-	  $checkin_data = json_decode(file_get_contents($recent_url));
-	  //error_log("Checkin data: ".json_encode($checkin_data));
-	  return $checkin_data;
+	function recent_checkins()
+	{
+		$limit = 250;
+		$before = '';//'&beforeTimestamp=1350164707';
+		$recent_url = $this->api_url.'/users/self/checkins?oauth_token='.$this->access_token.'&v=20120717&limit='.$limit.$before;
+		$checkin_data = json_decode(file_get_contents($recent_url));
+		
+		return $checkin_data;
 	}
 
 }
